@@ -4,6 +4,7 @@ import flixel.addons.text.FlxTypeText;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.FlxSubState;
 import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
@@ -15,7 +16,8 @@ import haxe.ds.Vector;
 import openfl.Assets;
 import rules.Rule;
 import rules.RuleLetterCount;
-import source.Record;
+import PlayerChooseState;
+import Record;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -24,12 +26,16 @@ class PlayState extends FlxState
 {
 	//History variables
 	var records:Array<Record>;
-	
+
+	var playerChooseState:FlxSubState;
 	
 	//Game variables
-	var words:Array<String>;
+	var gs:GameState;
+	var lastgs:GameState;
 	var score:Vector<Int>;
 	var rules:Array<Rule>;
+	
+	var activeDebator:Int = 0;
 	
 	var currentRule:Rule;
 	
@@ -38,8 +44,10 @@ class PlayState extends FlxState
 	var roundsComplete:FlxText;
 	var names:FlxTypedGroup<FlxText>;
 	var damageDealt:FlxTypedGroup<FlxText>;
+	var speechBubble:FlxSprite;
 	
-	var options:Vector<FlxButton>;
+	var transition:Int = 0;
+	
 	
 	
 	
@@ -49,33 +57,43 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		words = new Array<String>();
-		var tempwords = Assets.getText("assets/data/words.txt");
-		words = tempwords.split("\n");
-
-		//Game variables
+		
+		Reg.init();
+		playerChooseState = new PlayerChooseState();
+		
 		rules = new Array<Rule>();
 		importRules();
 		
-		//Get the current rule.
+		//Set the current rule.
 		currentRule = getRandomRule();
-		//Display variables
-		options = new Vector<FlxButton>(4);
-		for (i in 0...4) {
-			var btn = new FlxButton();
-			btn.makeGraphic(250, 50, FlxColor.TRANSPARENT, false);
-			btn.label.setFormat(null, 15, FlxColor.WHITE, "center");
-			btn.kill();
-			options[i] = btn;
-		}
 		
-		options[0].setPosition(150, 100);
-		options[1].setPosition(150, 200);
-		options[2].setPosition(400, 100);
-		options[3].setPosition(400, 200);
+		setupDisplay();	
 		
-		for(i in 0...4)
-		add(options[i]);
+		
+		//Test stuff
+		var layout = new FlxSprite(0, 0, "assets/images/layoutTest.png");
+		add(layout);
+		gs = GameState.debatestart;
+
+		//Add things to the stage.
+		
+		
+		add(speechBubble);
+
+		
+		var p1 = new FlxSprite(80, 250);
+		p1.loadGraphic("assets/images/einstein.png", true);
+		p1.animation.add("stand", [2]);
+		p1.animation.add("talk", [2,3,4,5], 10);
+		p1.animation.play("stand");
+		add(p1);
+		var p2 = new FlxSprite(550, 250);
+		p2.loadGraphic("assets/images/einstein.png", true);
+		p2.animation.add("stand", [2]);
+		p2.animation.add("talk", [2,3,4,5], 10);
+		p2.animation.play("talk");
+		p2.flipX = true;
+		add(p2);
 		
 		
 	}
@@ -96,19 +114,34 @@ class PlayState extends FlxState
 	{
 		super.update();
 		
-		if (FlxG.mouse.justPressed) {
-			var point = FlxPoint.get(FlxG.mouse.x, FlxG.mouse.y);
-			for (i in 0...4) {
-				if (options[i].overlapsPoint(point)) {
-					trace(options[i].text + " worth: " + currentRule.scoreWord(options[i].text));
+		switch (gs) 
+		{
+			case GameState.transition:
+				if (transition == 0) {
+					//Go to the next state based on where we came from.
 				}
 				
-				options[i].text = getRandomWord();
-				options[i].revive();
-			}
-			
-			point.put();
+			case GameState.firstDebate:
+				if (activeDebator == 1) {
+					
+				}
+				
+			case GameState.score:
+				trace(Reg.word + " scored " + currentRule.scoreWord(Reg.word));
+				lastgs = gs;
+				gs = GameState.transition;
+			default:
+				
 		}
+		
+		if (FlxG.keys.anyJustPressed(["SPACE"] )) {
+			var ss = new PlayerChooseState();
+			lastgs = gs;
+			gs = GameState.score;
+			this.openSubState(ss);
+		}
+
+		
 	}
 	
 	public function importRules() {
@@ -119,7 +152,15 @@ class PlayState extends FlxState
 		return rules[FlxRandom.intRanged(0, rules.length - 1) ];
 	}
 	
-	private function getRandomWord():String {
-		return words[FlxRandom.intRanged(0, words.length - 1)];
+	
+
+	
+	function setupDisplay():Void 
+	{
+		speechBubble = new FlxSprite(0, 20, "assets/images/speechBubble.png");
+		speechBubble.flipX = false;
+		speechBubble.kill();
+		
+		
 	}
 }
