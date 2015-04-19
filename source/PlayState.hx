@@ -7,6 +7,8 @@ import flixel.FlxState;
 import flixel.FlxSubState;
 import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import flixel.util.FlxMath;
@@ -31,23 +33,39 @@ class PlayState extends FlxState
 	
 	//Game variables
 	var gs:GameState;
-	var lastgs:GameState;
+	var nextgs:GameState;
 	var score:Vector<Int>;
 	var rules:Array<Rule>;
 	
-	var activeDebator:Int = 0;
+	var currentRound:Int = 0;
+	var displayQueue:Array<String>;
+	
+	var activeSpeaker:Int = 0;
 	
 	var currentRule:Rule;
 	
 	//Display variables
+	var bg:FlxSprite;
 	var mainText:FlxTypeText;
 	var roundsComplete:FlxText;
-	var names:FlxTypedGroup<FlxText>;
 	var damageDealt:FlxTypedGroup<FlxText>;
 	var speechBubble:FlxSprite;
 	
-	var transition:Int = 0;
+	var players:Vector<FlxSprite>;
 	
+	var crowd:FlxSprite;
+	
+	var scoreText:Vector<FlxText>;
+	
+	var mod:FlxSprite;
+	
+	var displayText:FlxText;
+	var transitions:Int = 0;
+	var transitionTime:Float;
+	
+	
+	//Debug stuff
+	var debugtext:FlxText;
 	
 	
 	
@@ -59,10 +77,14 @@ class PlayState extends FlxState
 		super.create();
 		
 		Reg.init();
-		playerChooseState = new PlayerChooseState();
+		score = new Vector<Int>(2);
+		score[0] = 0; 
+		score[1] = 0;
 		
 		rules = new Array<Rule>();
 		importRules();
+		
+		players = new Vector<FlxSprite>(2);
 		
 		//Set the current rule.
 		currentRule = getRandomRule();
@@ -71,31 +93,29 @@ class PlayState extends FlxState
 		
 		
 		//Test stuff
-		var layout = new FlxSprite(0, 0, "assets/images/layoutTest.png");
-		add(layout);
 		gs = GameState.debatestart;
 
 		//Add things to the stage.
 		
+		add(bg);
+		add(mod);
+		for (s in scoreText)
+		add(s);
+		
+		for (p in players)
+		add(p);
+		
+		add(displayText);
 		
 		add(speechBubble);
+		add(mainText);
+		
+		add(crowd);
 
 		
-		var p1 = new FlxSprite(80, 250);
-		p1.loadGraphic("assets/images/einstein.png", true);
-		p1.animation.add("stand", [2]);
-		p1.animation.add("talk", [2,3,4,5], 10);
-		p1.animation.play("stand");
-		add(p1);
-		var p2 = new FlxSprite(550, 250);
-		p2.loadGraphic("assets/images/einstein.png", true);
-		p2.animation.add("stand", [2]);
-		p2.animation.add("talk", [2,3,4,5], 10);
-		p2.animation.play("talk");
-		p2.flipX = true;
-		add(p2);
 		
-		
+		debugtext = new FlxText(10, 550, 780, "", 10);
+		//add(debugtext);
 	}
 	
 	/**
@@ -113,30 +133,132 @@ class PlayState extends FlxState
 	override public function update():Void
 	{
 		super.update();
+		debugtext.text = gs +"";
 		
 		switch (gs) 
 		{
-			case GameState.transition:
-				if (transition == 0) {
-					//Go to the next state based on where we came from.
+			case GameState.debatestart:
+				mod.animation.play("center");
+				addToQueue("Start of Debate");
+				nextgs = GameState.roundstart;
+				gs = GameState.transition;
+				
+				
+			case GameState.playerselect:
+				if (Reg.compControlled[activeSpeaker]) {
+					var words = new Array<String>();
+					for(i in 0...4)
+					words.push(Reg.getRandomWord());
+					Reg.word = words[Reg.compAI[activeSpeaker].pickWord(words, currentRule)];
+				} else {
+					var ss = new PlayerChooseState();
+					this.openSubState(ss);
 				}
+				//Set the transition time to -1 so the next state knows it is the first time it is running.
+				transitionTime = -1;
+				//This transitions to the speech bubblse.
+				gs = GameState.writetext;
+				
+			case GameState.roundstart:	
+				currentRound++;
+				//If this is an odd numbered round, player 1 starts.
+				addToQueue("Start of Round " + currentRound);
+				nextgs = GameState.firstDebate;
+				gs = GameState.transition;
+					
+				
+			case GameState.roundend:
+				mod.animation.play("center");
+				addToQueue("END OF ROUND " + currentRound);
+				if (currentRound == Reg.DEBATE_LENGTH) 
+					nextgs = GameState.debateEnd;
+				else
+				nextgs = GameState.roundstart;
+				gs = GameState.transition;
+			
+			case GameState.transition:
+					transitionTime -= FlxG.elapsed;
+					if (transitionTime <= 0) {
+					finishTransition();
+						if (displayQueue.length == 0)
+						gs = nextgs;
+					}
+				
 				
 			case GameState.firstDebate:
-				if (activeDebator == 1) {
-					
+				//If this is an odd numbered round, player 1 makes the statement.
+				if (currentRound % 2 == 1) {
+					activeSpeaker = 0;
+					mod.animation.play("left");
+					addToQueue(Reg.names[0] + ", you start.");
 				}
+				else {
+					activeSpeaker = 1;
+					mod.animation.play("right");
+					addToQueue(Reg.names[1] + ", you start.");
+				
+				}
+				gs = GameState.transition;
+				nextgs = GameState.playerselect;
+			case GameState.secondDebate: 
+				//If this is an odd numbered round, player 2 makes the rebuttal.
+				if (currentRound % 2 == 1) {
+					activeSpeaker = 1;
+					mod.animation.play("right");
+					addToQueue(Reg.names[1] + ", your rebuttal.");
+				}
+				else {
+					activeSpeaker = 0;
+					mod.animation.play("left");
+					addToQueue(Reg.names[0] + ", your rebuttal.");
+				}
+				gs = GameState.transition;
+				nextgs = GameState.playerselect;
 				
 			case GameState.score:
-				trace(Reg.word + " scored " + currentRule.scoreWord(Reg.word));
-				lastgs = gs;
+				var thisScore:Int = 0;
+				if(Reg.word != null) 
+				thisScore = currentRule.scoreWord(Reg.word);
+				
+				Reg.addRecord(activeSpeaker, Reg.word, thisScore);
+				
+				addToQueue(Reg.names[activeSpeaker] + " scored " + thisScore + " points.");
+				score[activeSpeaker] += thisScore;
+				scoreText[activeSpeaker].text = score[activeSpeaker] + "";
+				
 				gs = GameState.transition;
-			default:
+				
+				//Figure out if we need to go to the second Speaker or if we are done with the round.
+				if ((currentRound % 2 == 1 && activeSpeaker == 0) || (currentRound % 2 == 0 && activeSpeaker == 1))
+				nextgs = GameState.secondDebate;
+				else
+				nextgs = GameState.roundend;
+				
+			case GameState.writetext:
+				//If the transition time is -1, this is the first time we going here.
+				if (transitionTime == -1) {
+					if (Reg.word == null) {
+					startTyping("I... err.... ummm... well... ");
+						
+					} else 
+					startTyping("I am choosing the word " + Reg.word);
+				}
+				transitionTime -= FlxG.elapsed;
+				if (transitionTime <= 0) {
+					speechBubble.kill();
+					mainText.kill();
+					gs = GameState.score;
+				}
+				
+				
+				
+				default:
 				
 		}
 		
 		if (FlxG.keys.anyJustPressed(["SPACE"] )) {
 			var ss = new PlayerChooseState();
-			lastgs = gs;
+			nextgs = gs;
 			gs = GameState.score;
 			this.openSubState(ss);
 		}
@@ -153,14 +275,105 @@ class PlayState extends FlxState
 	}
 	
 	
-
+	private function addToScore(player:Int, score:Int) {
+		
+	}
+	
+	private function addToQueue(s:String) {
+		displayQueue.push(s);
+		if (displayQueue.length == 1)
+		startTransition();
+	}
+	
+	private function startTransition() {
+		transitionTime = Reg.TRANS_TIME;
+		displayText.text = displayQueue.shift();
+		displayText.set_visible(true);
+		displayText.centerOrigin();
+		displayText.scale.set(.01, .01);
+		
+		FlxTween.tween(displayText.scale, { x:1, y:1 }, .5, {ease:FlxEase.sineInOut} );
+		
+	}
+	
+	public function finishTransition() {
+		if (displayQueue.length > 0) {
+			startTransition();
+		} else
+		displayText.set_visible(false);
+	}
+	
+	public function startTyping(s:String) {
+		//Set the transition delay to something super high/
+		transitionTime = 10000;
+		
+		//Revive the speech bubble
+		speechBubble.revive();
+		
+		//Flip it for the right player.
+		if (activeSpeaker == 0)
+		speechBubble.flipX = false;
+		else
+		speechBubble.flipX = true;
+		
+		//Start typing.
+		mainText.revive();
+		mainText.resetText(s);
+		//mainText.addFormat(new FlxTextFormat(FlxColor.RED, true,null,null, 5, 6));
+		mainText.start(.001, true, false, null, null, finishTyping);
+		
+		players[activeSpeaker].animation.play("talk");
+	}
+	
+	public function finishTyping() {
+		players[activeSpeaker].animation.play("stand");
+		transitionTime = Reg.SPEECH_TIME;
+		
+	}
 	
 	function setupDisplay():Void 
 	{
+		displayQueue = new Array<String>();
+		
+		displayText = new FlxText(50, 30, 700, "", 50);
+		displayText.setFormat(null, 50, FlxColor.WHITE, "center");
+		
 		speechBubble = new FlxSprite(0, 20, "assets/images/speechBubble.png");
 		speechBubble.flipX = false;
 		speechBubble.kill();
 		
+		crowd = new FlxSprite(0, 500, "assets/images/crowd.png");
+		
+		mainText = new FlxTypeText(50, 50, 700, "", 20);
+		mainText.setFormat(null, 20, FlxColor.BLACK, "center");
+		
+		scoreText = new Vector<FlxText>(2);
+		scoreText[0] = new FlxText(290, 310, 125, score[0] + "", 15);
+		scoreText[0].setFormat(null, 25, FlxColor.WHITE, "center");
+		scoreText[1] = new FlxText(395, 310, 125, score[1] + "", 15);
+		scoreText[1].setFormat(null, 25, FlxColor.WHITE, "center");
+		
+		
+		
+		bg = new FlxSprite(0, 0, "assets/images/bg.png");
+		mod = new FlxSprite(280, 210);
+		mod.loadGraphic("assets/images/mod.png", true, 250);
+		mod.animation.add("center", [0]);
+		mod.animation.add("right", [1]);
+		mod.animation.add("left", [2]);
+		
+		players[0] = new FlxSprite(80, 250);
+		players[0] .loadGraphic("assets/images/" + Reg.playerAvatar[0]+ ".png", true);
+		players[0] .animation.add("stand", [0]);
+		players[0] .animation.add("talk", [0,1,2,3], 10);
+		players[0] .animation.play("stand");
+		players[1]  = new FlxSprite(550, 250);
+		players[1] .loadGraphic("assets/images/" + Reg.playerAvatar[1]+ ".png", true);
+		players[1].animation.add("stand", [0]);
+		players[1].animation.add("talk", [0,1,2,3], 10);
+		players[1].animation.play("stand");
+		players[1].flipX = true;
+
 		
 	}
 }

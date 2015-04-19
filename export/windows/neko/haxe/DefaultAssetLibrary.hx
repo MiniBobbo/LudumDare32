@@ -46,16 +46,36 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		path.set ("assets/data/adjectives.txt", "assets/data/adjectives.txt");
+		type.set ("assets/data/adjectives.txt", AssetType.TEXT);
+		path.set ("assets/data/adverbs.txt", "assets/data/adverbs.txt");
+		type.set ("assets/data/adverbs.txt", AssetType.TEXT);
+		path.set ("assets/data/arguments.txt", "assets/data/arguments.txt");
+		type.set ("assets/data/arguments.txt", AssetType.TEXT);
 		path.set ("assets/data/data-goes-here.txt", "assets/data/data-goes-here.txt");
 		type.set ("assets/data/data-goes-here.txt", AssetType.TEXT);
+		path.set ("assets/data/nouns.txt", "assets/data/nouns.txt");
+		type.set ("assets/data/nouns.txt", AssetType.TEXT);
+		path.set ("assets/data/rebuttals.txt", "assets/data/rebuttals.txt");
+		type.set ("assets/data/rebuttals.txt", AssetType.TEXT);
+		path.set ("assets/data/verbs.txt", "assets/data/verbs.txt");
+		type.set ("assets/data/verbs.txt", AssetType.TEXT);
 		path.set ("assets/data/words.txt", "assets/data/words.txt");
 		type.set ("assets/data/words.txt", AssetType.TEXT);
+		path.set ("assets/images/bg.png", "assets/images/bg.png");
+		type.set ("assets/images/bg.png", AssetType.IMAGE);
+		path.set ("assets/images/crowd.png", "assets/images/crowd.png");
+		type.set ("assets/images/crowd.png", AssetType.IMAGE);
 		path.set ("assets/images/einstein.png", "assets/images/einstein.png");
 		type.set ("assets/images/einstein.png", AssetType.IMAGE);
 		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
 		path.set ("assets/images/layoutTest.png", "assets/images/layoutTest.png");
 		type.set ("assets/images/layoutTest.png", AssetType.IMAGE);
+		path.set ("assets/images/mod.png", "assets/images/mod.png");
+		type.set ("assets/images/mod.png", AssetType.IMAGE);
+		path.set ("assets/images/neildegrassetyson.png", "assets/images/neildegrassetyson.png");
+		type.set ("assets/images/neildegrassetyson.png", AssetType.IMAGE);
 		path.set ("assets/images/speechBubble.png", "assets/images/speechBubble.png");
 		type.set ("assets/images/speechBubble.png", AssetType.IMAGE);
 		path.set ("assets/images/thoughtBubble.png", "assets/images/thoughtBubble.png");
@@ -73,12 +93,36 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
+		id = "assets/data/adjectives.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/adverbs.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/arguments.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
 		id = "assets/data/data-goes-here.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/nouns.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/rebuttals.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/verbs.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/data/words.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/bg.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/crowd.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/einstein.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -86,6 +130,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/images/layoutTest.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/mod.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/neildegrassetyson.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/speechBubble.png";
@@ -124,9 +174,29 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -768,7 +838,27 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
 #elseif html5
+
+
+
+
+
+
+
+
+
+
 
 
 

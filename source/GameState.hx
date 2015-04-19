@@ -7,6 +7,7 @@ package;
 enum GameState 
 {
 	debatestart;
+	debateEnd;
 	firstDebate;
 	secondDebate;
 	score;
@@ -14,4 +15,6 @@ enum GameState
 	roundend;
 	playerselect;
 	transition;
+	writetext;
+	showresults;
 }

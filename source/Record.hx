@@ -7,9 +7,9 @@ package;
 class Record
 {
 
-	public var player:String;
+	public var player:Int;
 	public var word:String;
-	public var damage:Int;
+	public var score:Int;
 	
 	public function new() 
 	{

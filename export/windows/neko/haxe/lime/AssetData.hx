@@ -16,16 +16,36 @@ class AssetData {
 		
 		if (!initialized) {
 			
+			path.set ("assets/data/adjectives.txt", "assets/data/adjectives.txt");
+			type.set ("assets/data/adjectives.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/adverbs.txt", "assets/data/adverbs.txt");
+			type.set ("assets/data/adverbs.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/arguments.txt", "assets/data/arguments.txt");
+			type.set ("assets/data/arguments.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/data-goes-here.txt", "assets/data/data-goes-here.txt");
 			type.set ("assets/data/data-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/nouns.txt", "assets/data/nouns.txt");
+			type.set ("assets/data/nouns.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/rebuttals.txt", "assets/data/rebuttals.txt");
+			type.set ("assets/data/rebuttals.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/verbs.txt", "assets/data/verbs.txt");
+			type.set ("assets/data/verbs.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/words.txt", "assets/data/words.txt");
 			type.set ("assets/data/words.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/images/bg.png", "assets/images/bg.png");
+			type.set ("assets/images/bg.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/crowd.png", "assets/images/crowd.png");
+			type.set ("assets/images/crowd.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/einstein.png", "assets/images/einstein.png");
 			type.set ("assets/images/einstein.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 			type.set ("assets/images/images-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/layoutTest.png", "assets/images/layoutTest.png");
 			type.set ("assets/images/layoutTest.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/mod.png", "assets/images/mod.png");
+			type.set ("assets/images/mod.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/neildegrassetyson.png", "assets/images/neildegrassetyson.png");
+			type.set ("assets/images/neildegrassetyson.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/speechBubble.png", "assets/images/speechBubble.png");
 			type.set ("assets/images/speechBubble.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/thoughtBubble.png", "assets/images/thoughtBubble.png");
