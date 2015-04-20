@@ -50,24 +50,30 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/adjectives.txt", AssetType.TEXT);
 		path.set ("assets/data/adverbs.txt", "assets/data/adverbs.txt");
 		type.set ("assets/data/adverbs.txt", AssetType.TEXT);
-		path.set ("assets/data/arguments.txt", "assets/data/arguments.txt");
-		type.set ("assets/data/arguments.txt", AssetType.TEXT);
 		path.set ("assets/data/data-goes-here.txt", "assets/data/data-goes-here.txt");
 		type.set ("assets/data/data-goes-here.txt", AssetType.TEXT);
-		path.set ("assets/data/nouns.txt", "assets/data/nouns.txt");
-		type.set ("assets/data/nouns.txt", AssetType.TEXT);
-		path.set ("assets/data/rebuttals.txt", "assets/data/rebuttals.txt");
-		type.set ("assets/data/rebuttals.txt", AssetType.TEXT);
+		path.set ("assets/data/nouns/arguments.txt", "assets/data/nouns/arguments.txt");
+		type.set ("assets/data/nouns/arguments.txt", AssetType.TEXT);
+		path.set ("assets/data/nouns/debateSubject.txt", "assets/data/nouns/debateSubject.txt");
+		type.set ("assets/data/nouns/debateSubject.txt", AssetType.TEXT);
+		path.set ("assets/data/nouns/nouns.txt", "assets/data/nouns/nouns.txt");
+		type.set ("assets/data/nouns/nouns.txt", AssetType.TEXT);
+		path.set ("assets/data/nouns/rebuttals.txt", "assets/data/nouns/rebuttals.txt");
+		type.set ("assets/data/nouns/rebuttals.txt", AssetType.TEXT);
 		path.set ("assets/data/verbs.txt", "assets/data/verbs.txt");
 		type.set ("assets/data/verbs.txt", AssetType.TEXT);
 		path.set ("assets/data/words.txt", "assets/data/words.txt");
 		type.set ("assets/data/words.txt", AssetType.TEXT);
+		path.set ("assets/images/Aristotle.png", "assets/images/Aristotle.png");
+		type.set ("assets/images/Aristotle.png", AssetType.IMAGE);
 		path.set ("assets/images/bg.png", "assets/images/bg.png");
 		type.set ("assets/images/bg.png", AssetType.IMAGE);
 		path.set ("assets/images/crowd.png", "assets/images/crowd.png");
 		type.set ("assets/images/crowd.png", AssetType.IMAGE);
 		path.set ("assets/images/einstein.png", "assets/images/einstein.png");
 		type.set ("assets/images/einstein.png", AssetType.IMAGE);
+		path.set ("assets/images/hal9000.png", "assets/images/hal9000.png");
+		type.set ("assets/images/hal9000.png", AssetType.IMAGE);
 		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
 		path.set ("assets/images/layoutTest.png", "assets/images/layoutTest.png");
@@ -80,6 +86,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/speechBubble.png", AssetType.IMAGE);
 		path.set ("assets/images/thoughtBubble.png", "assets/images/thoughtBubble.png");
 		type.set ("assets/images/thoughtBubble.png", AssetType.IMAGE);
+		path.set ("assets/music/main.mp3", "assets/music/main.mp3");
+		type.set ("assets/music/main.mp3", AssetType.MUSIC);
+		path.set ("assets/music/main.wav", "assets/music/main.wav");
+		type.set ("assets/music/main.wav", AssetType.SOUND);
 		path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
 		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
 		path.set ("assets/sounds/sounds-go-here.txt", "assets/sounds/sounds-go-here.txt");
@@ -99,16 +109,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/data/adverbs.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
-		id = "assets/data/arguments.txt";
-		path.set (id, id);
-		type.set (id, AssetType.TEXT);
 		id = "assets/data/data-goes-here.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
-		id = "assets/data/nouns.txt";
+		id = "assets/data/nouns/arguments.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
-		id = "assets/data/rebuttals.txt";
+		id = "assets/data/nouns/debateSubject.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/nouns/nouns.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/nouns/rebuttals.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/data/verbs.txt";
@@ -117,6 +130,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/data/words.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/Aristotle.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/bg.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -124,6 +140,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/einstein.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/hal9000.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/images-go-here.txt";
@@ -144,6 +163,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/thoughtBubble.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/music/main.mp3";
+		path.set (id, id);
+		type.set (id, AssetType.MUSIC);
+		id = "assets/music/main.wav";
+		path.set (id, id);
+		type.set (id, AssetType.SOUND);
 		id = "assets/music/music-goes-here.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
@@ -184,9 +209,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -848,7 +883,17 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
 #elseif html5
+
+
+
+
+
 
 
 

@@ -49,24 +49,30 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/adjectives.txt", AssetType.TEXT);
 		className.set ("assets/data/adverbs.txt", __ASSET__assets_data_adverbs_txt);
 		type.set ("assets/data/adverbs.txt", AssetType.TEXT);
-		className.set ("assets/data/arguments.txt", __ASSET__assets_data_arguments_txt);
-		type.set ("assets/data/arguments.txt", AssetType.TEXT);
 		className.set ("assets/data/data-goes-here.txt", __ASSET__assets_data_data_goes_here_txt);
 		type.set ("assets/data/data-goes-here.txt", AssetType.TEXT);
-		className.set ("assets/data/nouns.txt", __ASSET__assets_data_nouns_txt);
-		type.set ("assets/data/nouns.txt", AssetType.TEXT);
-		className.set ("assets/data/rebuttals.txt", __ASSET__assets_data_rebuttals_txt);
-		type.set ("assets/data/rebuttals.txt", AssetType.TEXT);
+		className.set ("assets/data/nouns/arguments.txt", __ASSET__assets_data_nouns_arguments_txt);
+		type.set ("assets/data/nouns/arguments.txt", AssetType.TEXT);
+		className.set ("assets/data/nouns/debateSubject.txt", __ASSET__assets_data_nouns_debatesubject_txt);
+		type.set ("assets/data/nouns/debateSubject.txt", AssetType.TEXT);
+		className.set ("assets/data/nouns/nouns.txt", __ASSET__assets_data_nouns_nouns_txt);
+		type.set ("assets/data/nouns/nouns.txt", AssetType.TEXT);
+		className.set ("assets/data/nouns/rebuttals.txt", __ASSET__assets_data_nouns_rebuttals_txt);
+		type.set ("assets/data/nouns/rebuttals.txt", AssetType.TEXT);
 		className.set ("assets/data/verbs.txt", __ASSET__assets_data_verbs_txt);
 		type.set ("assets/data/verbs.txt", AssetType.TEXT);
 		className.set ("assets/data/words.txt", __ASSET__assets_data_words_txt);
 		type.set ("assets/data/words.txt", AssetType.TEXT);
+		className.set ("assets/images/Aristotle.png", __ASSET__assets_images_aristotle_png);
+		type.set ("assets/images/Aristotle.png", AssetType.IMAGE);
 		className.set ("assets/images/bg.png", __ASSET__assets_images_bg_png);
 		type.set ("assets/images/bg.png", AssetType.IMAGE);
 		className.set ("assets/images/crowd.png", __ASSET__assets_images_crowd_png);
 		type.set ("assets/images/crowd.png", AssetType.IMAGE);
 		className.set ("assets/images/einstein.png", __ASSET__assets_images_einstein_png);
 		type.set ("assets/images/einstein.png", AssetType.IMAGE);
+		className.set ("assets/images/hal9000.png", __ASSET__assets_images_hal9000_png);
+		type.set ("assets/images/hal9000.png", AssetType.IMAGE);
 		className.set ("assets/images/images-go-here.txt", __ASSET__assets_images_images_go_here_txt);
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
 		className.set ("assets/images/layoutTest.png", __ASSET__assets_images_layouttest_png);
@@ -79,6 +85,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/speechBubble.png", AssetType.IMAGE);
 		className.set ("assets/images/thoughtBubble.png", __ASSET__assets_images_thoughtbubble_png);
 		type.set ("assets/images/thoughtBubble.png", AssetType.IMAGE);
+		className.set ("assets/music/main.mp3", __ASSET__assets_music_main_mp3);
+		type.set ("assets/music/main.mp3", AssetType.MUSIC);
+		className.set ("assets/music/main.wav", __ASSET__assets_music_main_wav);
+		type.set ("assets/music/main.wav", AssetType.SOUND);
 		className.set ("assets/music/music-goes-here.txt", __ASSET__assets_music_music_goes_here_txt);
 		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
 		className.set ("assets/sounds/sounds-go-here.txt", __ASSET__assets_sounds_sounds_go_here_txt);
@@ -100,19 +110,23 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
-		id = "assets/data/arguments.txt";
-		path.set (id, id);
-		
-		type.set (id, AssetType.TEXT);
 		id = "assets/data/data-goes-here.txt";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
-		id = "assets/data/nouns.txt";
+		id = "assets/data/nouns/arguments.txt";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
-		id = "assets/data/rebuttals.txt";
+		id = "assets/data/nouns/debateSubject.txt";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/nouns/nouns.txt";
+		path.set (id, id);
+		
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/nouns/rebuttals.txt";
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
@@ -124,6 +138,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/Aristotle.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/bg.png";
 		path.set (id, id);
 		
@@ -133,6 +151,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/einstein.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/hal9000.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
@@ -160,6 +182,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
+		id = "assets/music/main.mp3";
+		path.set (id, id);
+		
+		type.set (id, AssetType.MUSIC);
+		id = "assets/music/main.wav";
+		path.set (id, id);
+		
+		type.set (id, AssetType.SOUND);
 		id = "assets/music/music-goes-here.txt";
 		path.set (id, id);
 		
@@ -211,6 +241,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
 		#end
 		
 		#if (windows || mac || linux)
@@ -223,23 +258,29 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/data/adverbs.txt", __ASSET__assets_data_adverbs_txt);
 		type.set ("assets/data/adverbs.txt", AssetType.TEXT);
 		
-		className.set ("assets/data/arguments.txt", __ASSET__assets_data_arguments_txt);
-		type.set ("assets/data/arguments.txt", AssetType.TEXT);
-		
 		className.set ("assets/data/data-goes-here.txt", __ASSET__assets_data_data_goes_here_txt);
 		type.set ("assets/data/data-goes-here.txt", AssetType.TEXT);
 		
-		className.set ("assets/data/nouns.txt", __ASSET__assets_data_nouns_txt);
-		type.set ("assets/data/nouns.txt", AssetType.TEXT);
+		className.set ("assets/data/nouns/arguments.txt", __ASSET__assets_data_nouns_arguments_txt);
+		type.set ("assets/data/nouns/arguments.txt", AssetType.TEXT);
 		
-		className.set ("assets/data/rebuttals.txt", __ASSET__assets_data_rebuttals_txt);
-		type.set ("assets/data/rebuttals.txt", AssetType.TEXT);
+		className.set ("assets/data/nouns/debateSubject.txt", __ASSET__assets_data_nouns_debatesubject_txt);
+		type.set ("assets/data/nouns/debateSubject.txt", AssetType.TEXT);
+		
+		className.set ("assets/data/nouns/nouns.txt", __ASSET__assets_data_nouns_nouns_txt);
+		type.set ("assets/data/nouns/nouns.txt", AssetType.TEXT);
+		
+		className.set ("assets/data/nouns/rebuttals.txt", __ASSET__assets_data_nouns_rebuttals_txt);
+		type.set ("assets/data/nouns/rebuttals.txt", AssetType.TEXT);
 		
 		className.set ("assets/data/verbs.txt", __ASSET__assets_data_verbs_txt);
 		type.set ("assets/data/verbs.txt", AssetType.TEXT);
 		
 		className.set ("assets/data/words.txt", __ASSET__assets_data_words_txt);
 		type.set ("assets/data/words.txt", AssetType.TEXT);
+		
+		className.set ("assets/images/Aristotle.png", __ASSET__assets_images_aristotle_png);
+		type.set ("assets/images/Aristotle.png", AssetType.IMAGE);
 		
 		className.set ("assets/images/bg.png", __ASSET__assets_images_bg_png);
 		type.set ("assets/images/bg.png", AssetType.IMAGE);
@@ -249,6 +290,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/images/einstein.png", __ASSET__assets_images_einstein_png);
 		type.set ("assets/images/einstein.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/hal9000.png", __ASSET__assets_images_hal9000_png);
+		type.set ("assets/images/hal9000.png", AssetType.IMAGE);
 		
 		className.set ("assets/images/images-go-here.txt", __ASSET__assets_images_images_go_here_txt);
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
@@ -267,6 +311,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/images/thoughtBubble.png", __ASSET__assets_images_thoughtbubble_png);
 		type.set ("assets/images/thoughtBubble.png", AssetType.IMAGE);
+		
+		className.set ("assets/music/main.mp3", __ASSET__assets_music_main_mp3);
+		type.set ("assets/music/main.mp3", AssetType.MUSIC);
+		
+		className.set ("assets/music/main.wav", __ASSET__assets_music_main_wav);
+		type.set ("assets/music/main.wav", AssetType.SOUND);
 		
 		className.set ("assets/music/music-goes-here.txt", __ASSET__assets_music_music_goes_here_txt);
 		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
@@ -882,21 +932,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 @:keep @:bind #if display private #end class __ASSET__assets_data_adjectives_txt extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_adverbs_txt extends flash.utils.ByteArray { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_arguments_txt extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_data_goes_here_txt extends flash.utils.ByteArray { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_nouns_txt extends flash.utils.ByteArray { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_rebuttals_txt extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_nouns_arguments_txt extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_nouns_debatesubject_txt extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_nouns_nouns_txt extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_nouns_rebuttals_txt extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_verbs_txt extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_words_txt extends flash.utils.ByteArray { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_aristotle_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_bg_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_crowd_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_einstein_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_hal9000_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_images_go_here_txt extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_layouttest_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_mod_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_neildegrassetyson_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_speechbubble_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_thoughtbubble_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_music_main_mp3 extends flash.media.Sound { }
+@:keep @:bind #if display private #end class __ASSET__assets_music_main_wav extends flash.media.Sound { }
 @:keep @:bind #if display private #end class __ASSET__assets_music_music_goes_here_txt extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends flash.utils.ByteArray { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_beep_mp3 extends flash.media.Sound { }
@@ -904,6 +959,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
+
 
 
 
@@ -937,21 +997,26 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 @:file("assets/data/adjectives.txt") #if display private #end class __ASSET__assets_data_adjectives_txt extends lime.utils.ByteArray {}
 @:file("assets/data/adverbs.txt") #if display private #end class __ASSET__assets_data_adverbs_txt extends lime.utils.ByteArray {}
-@:file("assets/data/arguments.txt") #if display private #end class __ASSET__assets_data_arguments_txt extends lime.utils.ByteArray {}
 @:file("assets/data/data-goes-here.txt") #if display private #end class __ASSET__assets_data_data_goes_here_txt extends lime.utils.ByteArray {}
-@:file("assets/data/nouns.txt") #if display private #end class __ASSET__assets_data_nouns_txt extends lime.utils.ByteArray {}
-@:file("assets/data/rebuttals.txt") #if display private #end class __ASSET__assets_data_rebuttals_txt extends lime.utils.ByteArray {}
+@:file("assets/data/nouns/arguments.txt") #if display private #end class __ASSET__assets_data_nouns_arguments_txt extends lime.utils.ByteArray {}
+@:file("assets/data/nouns/debateSubject.txt") #if display private #end class __ASSET__assets_data_nouns_debatesubject_txt extends lime.utils.ByteArray {}
+@:file("assets/data/nouns/nouns.txt") #if display private #end class __ASSET__assets_data_nouns_nouns_txt extends lime.utils.ByteArray {}
+@:file("assets/data/nouns/rebuttals.txt") #if display private #end class __ASSET__assets_data_nouns_rebuttals_txt extends lime.utils.ByteArray {}
 @:file("assets/data/verbs.txt") #if display private #end class __ASSET__assets_data_verbs_txt extends lime.utils.ByteArray {}
 @:file("assets/data/words.txt") #if display private #end class __ASSET__assets_data_words_txt extends lime.utils.ByteArray {}
+@:image("assets/images/Aristotle.png") #if display private #end class __ASSET__assets_images_aristotle_png extends lime.graphics.Image {}
 @:image("assets/images/bg.png") #if display private #end class __ASSET__assets_images_bg_png extends lime.graphics.Image {}
 @:image("assets/images/crowd.png") #if display private #end class __ASSET__assets_images_crowd_png extends lime.graphics.Image {}
 @:image("assets/images/einstein.png") #if display private #end class __ASSET__assets_images_einstein_png extends lime.graphics.Image {}
+@:image("assets/images/hal9000.png") #if display private #end class __ASSET__assets_images_hal9000_png extends lime.graphics.Image {}
 @:file("assets/images/images-go-here.txt") #if display private #end class __ASSET__assets_images_images_go_here_txt extends lime.utils.ByteArray {}
 @:image("assets/images/layoutTest.png") #if display private #end class __ASSET__assets_images_layouttest_png extends lime.graphics.Image {}
 @:image("assets/images/mod.png") #if display private #end class __ASSET__assets_images_mod_png extends lime.graphics.Image {}
 @:image("assets/images/neildegrassetyson.png") #if display private #end class __ASSET__assets_images_neildegrassetyson_png extends lime.graphics.Image {}
 @:image("assets/images/speechBubble.png") #if display private #end class __ASSET__assets_images_speechbubble_png extends lime.graphics.Image {}
 @:image("assets/images/thoughtBubble.png") #if display private #end class __ASSET__assets_images_thoughtbubble_png extends lime.graphics.Image {}
+@:file("assets/music/main.mp3") #if display private #end class __ASSET__assets_music_main_mp3 extends lime.utils.ByteArray {}
+@:file("assets/music/main.wav") #if display private #end class __ASSET__assets_music_main_wav extends lime.utils.ByteArray {}
 @:file("assets/music/music-goes-here.txt") #if display private #end class __ASSET__assets_music_music_goes_here_txt extends lime.utils.ByteArray {}
 @:file("assets/sounds/sounds-go-here.txt") #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends lime.utils.ByteArray {}
 @:file("C:/HaxeToolkit/haxe/lib/flixel/3,3,8/assets/sounds/beep.mp3") #if display private #end class __ASSET__assets_sounds_beep_mp3 extends lime.utils.ByteArray {}

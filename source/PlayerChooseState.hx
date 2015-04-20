@@ -33,10 +33,9 @@ class PlayerChooseState extends FlxSubState
 		tb = new FlxSprite(0, 20, "assets/images/thoughtBubble.png");
 		
 		countdown = Reg.PLAYER_CHOICE_TIME;
-		timer = new FlxText(10, 30, 100, Std.int(countdown) + "", 30);
-		timer.color = FlxColor.BLACK;
+		timer = new FlxText(350, 350, 100, Std.int(countdown) + "", 50);
+		timer.setFormat(null, 50, FlxColor.WHITE, "center");
 		add(tb);
-		add(timer);
 		t = new FlxText(0, 30, 800, "What should my next topic be?", 25);
 		t.setFormat(null, 25, FlxColor.BLACK, "center");
 		add(t);
@@ -62,6 +61,8 @@ class PlayerChooseState extends FlxSubState
 		blackBlock.makeGraphic(760, 290, FlxColor.BLACK);
 		blackBlock.alpha = .7;
 		add(blackBlock);
+		add(timer);
+
 		
 		var p1y:Float = 310;
 		var p2y:Float = 310;
@@ -97,10 +98,11 @@ class PlayerChooseState extends FlxSubState
 			for (i in 0...4) {
 				if (options[i].overlapsPoint(point)) {
 					Reg.word = options[i].text;
+					point.put();
+					this.close();
+
 				}
 			}
-			point.put();
-			this.close();
 		}
 		
 		countdown -= FlxG.elapsed;

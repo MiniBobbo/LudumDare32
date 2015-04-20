@@ -35,7 +35,6 @@ class PlayState extends FlxState
 	var gs:GameState;
 	var nextgs:GameState;
 	var score:Vector<Int>;
-	var rules:Array<Rule>;
 	
 	var currentRound:Int = 0;
 	var displayQueue:Array<String>;
@@ -63,9 +62,12 @@ class PlayState extends FlxState
 	var transitions:Int = 0;
 	var transitionTime:Float;
 	
+	var btnMute:FlxButton;
 	
 	//Debug stuff
 	var debugtext:FlxText;
+	
+	//Music
 	
 	
 	
@@ -76,19 +78,16 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
-		Reg.init();
+		//Reg.init();
 		score = new Vector<Int>(2);
 		score[0] = 0; 
 		score[1] = 0;
 		
-		rules = new Array<Rule>();
-		importRules();
-		
 		players = new Vector<FlxSprite>(2);
 		
 		//Set the current rule.
-		currentRule = getRandomRule();
-		
+		currentRule = Reg.getRandomRule();
+		Reg.debateRule = currentRule;
 		setupDisplay();	
 		
 		
@@ -112,10 +111,19 @@ class PlayState extends FlxState
 		
 		add(crowd);
 
-		
-		
+		//Start the music
+		#if flash
+		FlxG.sound.playMusic("assets/music/main.mp3", .4, true);
+		#else
+		FlxG.sound.playMusic("assets/music/main.wav", .4, true);
+		#end
 		debugtext = new FlxText(10, 550, 780, "", 10);
 		//add(debugtext);
+		
+		btnMute =  new FlxButton(10, 570, "Mute", muteMusic);
+		btnMute.makeGraphic(150, 30, FlxColor.TRANSPARENT);
+		btnMute.label.setFormat(null, 20, FlxColor.WHITE, "center");
+		add(btnMute);
 	}
 	
 	/**
@@ -125,6 +133,17 @@ class PlayState extends FlxState
 	override public function destroy():Void
 	{
 		super.destroy();
+	}
+	
+	public function muteMusic() {
+		if (btnMute.text == "Mute") {
+			btnMute.text = "Unmute";
+			FlxG.sound.muted = true;
+		} else {
+			btnMute.text = "Mute";
+			FlxG.sound.muted = false;
+			
+		}
 	}
 
 	/**
@@ -190,12 +209,12 @@ class PlayState extends FlxState
 				if (currentRound % 2 == 1) {
 					activeSpeaker = 0;
 					mod.animation.play("left");
-					addToQueue(Reg.names[0] + ", you start.");
+					addToQueue(Reg.names[0] + ", opening statement.");
 				}
 				else {
 					activeSpeaker = 1;
 					mod.animation.play("right");
-					addToQueue(Reg.names[1] + ", you start.");
+					addToQueue(Reg.names[1] + ", opening statement.");
 				
 				}
 				gs = GameState.transition;
@@ -218,7 +237,7 @@ class PlayState extends FlxState
 			case GameState.score:
 				var thisScore:Int = 0;
 				if(Reg.word != null) 
-				thisScore = currentRule.scoreWord(Reg.word);
+				thisScore = currentRule.scoreWord(Reg.word.substr(0, Reg.word.length-1));
 				
 				Reg.addRecord(activeSpeaker, Reg.word, thisScore);
 				
@@ -241,7 +260,7 @@ class PlayState extends FlxState
 					startTyping("I... err.... ummm... well... ");
 						
 					} else 
-					startTyping("I am choosing the word " + Reg.word);
+					generateStatement();
 				}
 				transitionTime -= FlxG.elapsed;
 				if (transitionTime <= 0) {
@@ -252,6 +271,18 @@ class PlayState extends FlxState
 				
 				
 				
+				case GameState.debateEnd:
+					addToQueue("Debate over");
+					Reg.scores[0] = score[0];
+					Reg.scores[1] = score[1];
+					nextgs = GameState.showresults;
+					gs = GameState.transition;
+					
+				case GameState.showresults:
+					//FlxG.camera.fade(FlxColor.BLACK, 1, false, function() { FlxG.switchState(new FinalResultState()); } );
+					//FlxG.camera.fade(FlxColor.BLACK, 1, false, function() { var ss = new PlayerWinState();
+					this.openSubState(new PlayerWinState());
+					//});
 				default:
 				
 		}
@@ -265,14 +296,42 @@ class PlayState extends FlxState
 
 		
 	}
-	
-	public function importRules() {
-		rules.push(new RuleLetterCount());
+
+	private function makeStatement() {
+		startTyping("I am choosing the word " + Reg.word);
+
 	}
 	
-	public function getRandomRule():Rule {
-		return rules[FlxRandom.intRanged(0, rules.length - 1) ];
+	private function generateStatement() {
+		var rebuttal:Bool = false;
+		if (currentRound % 2 == activeSpeaker) 
+			rebuttal = true;
+		
+		var sArray:Array<String>;
+		if (rebuttal)
+			sArray = Reg.getRandomRebuttal().split("*");
+		else
+			sArray = Reg.getRandomArgument().split("*");
+	
+		mainText.clearFormats();
+		var toSend:String = "";
+		var letterCount = 0;
+			
+		for (i in 0...sArray.length) {
+			var s = sArray[i];
+			toSend += s;
+			letterCount += s.length;
+			if (i != sArray.length - 1) {
+				toSend += Reg.word.substr(0, Reg.word.length - 1);
+				mainText.addFormat(new FlxTextFormat(FlxColor.CORAL, false, true, null, letterCount, letterCount + Reg.word.length-1));
+				letterCount += Reg.word.length -1;
+			}
+		}
+		startTyping(toSend);
 	}
+
+	
+	
 	
 	
 	private function addToScore(player:Int, score:Int) {
@@ -320,7 +379,7 @@ class PlayState extends FlxState
 		mainText.revive();
 		mainText.resetText(s);
 		//mainText.addFormat(new FlxTextFormat(FlxColor.RED, true,null,null, 5, 6));
-		mainText.start(.001, true, false, null, null, finishTyping);
+		mainText.start(Reg.TYPE_DELAY, true, false, null, null, finishTyping);
 		
 		players[activeSpeaker].animation.play("talk");
 	}

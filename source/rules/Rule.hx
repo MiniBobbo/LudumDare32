@@ -7,6 +7,9 @@ package rules;
 class Rule
 {
 
+	public var description:String = "This is the default description.  If you are seeing this the programmer stupidly forgot to set it for this rule.";
+	public var shortDesc:String = "This is the default short description.  You shouldn't see this.";
+	
 	public function new() 
 	{
 		

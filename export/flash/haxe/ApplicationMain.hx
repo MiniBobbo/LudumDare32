@@ -42,19 +42,23 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/arguments.txt");
-		types.push (lime.Assets.AssetType.TEXT);
-		
-		
 		urls.push ("assets/data/data-goes-here.txt");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/nouns.txt");
+		urls.push ("assets/data/nouns/arguments.txt");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
-		urls.push ("assets/data/rebuttals.txt");
+		urls.push ("assets/data/nouns/debateSubject.txt");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/nouns/nouns.txt");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
+		urls.push ("assets/data/nouns/rebuttals.txt");
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
@@ -66,6 +70,10 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/images/Aristotle.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/images/bg.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -75,6 +83,10 @@ class ApplicationMain {
 		
 		
 		urls.push ("assets/images/einstein.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/hal9000.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
@@ -100,6 +112,14 @@ class ApplicationMain {
 		
 		urls.push ("assets/images/thoughtBubble.png");
 		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/music/main.mp3");
+		types.push (lime.Assets.AssetType.MUSIC);
+		
+		
+		urls.push ("assets/music/main.wav");
+		types.push (lime.Assets.AssetType.SOUND);
 		
 		
 		urls.push ("assets/music/music-goes-here.txt");
